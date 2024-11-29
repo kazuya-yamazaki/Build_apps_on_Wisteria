@@ -115,7 +115,7 @@ nohup ./compile &> compile.log
 ```
 
 > [!NOTE]
-> WPS binaries built in this section are valid on prepost nodes and login nodes, but NOT on Odyssey.
-> Before you launch WPS binaries such as `ungrib.exe` and `metgrid.exe`, load `intel hdf5 netcdf netcdf-fortran` modules.
+> WPS binaries built in this section are valid on prepost nodes and login nodes, but not on Odyssey.
 > Please use the prepost node to prepare the initial conditions. However, if you are ABSOLUTELY SURE that the process finishes within a few minutes, you can launch WPS binaries on the login node.
+> Before you launch WPS binaries such as `ungrib.exe` and `metgrid.exe`, load `intel hdf5 netcdf netcdf-fortran` modules.
 
