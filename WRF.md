@@ -1,5 +1,5 @@
 # How to build WRF
-If you want to perform the entire simulation process on Wisteria, you need both WRF (a forecast model) and WPS (preprocessing tool). In this case, you need to go through four steps:
+If you want to perform the entire simulation process on Wisteria, you need both WRF (a forecast model) and WPS (preprocessing tool). In this case, you need to go through five steps:
 - [Fill out registation on the WRF page](#fill-out-registation-on-the-wrf-page)
 - [Decide where to install WRF](#decide-where-to-install-wrf)
 - [Compile WRF for Odyssey](#compile-wrf-for-odyssey)
