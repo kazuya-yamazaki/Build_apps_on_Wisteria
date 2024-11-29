@@ -3,8 +3,8 @@ If you want to perform the entire simulation process on Wisteria, you need both 
 - [Fill out registation on the WRF page](#fill-out-registation-on-the-wrf-page)
 - [Decide where to install WRF](#decide-where-to-install-wrf)
 - [Compile WRF for Odyssey](#compile-wrf-for-odyssey)
-- Compile WRF for Intel CPUs
-- Compile WPS for Intel CPUs
+- [Compile WRF for Intel CPUs](#compile-wrf-for-intel-cpus)
+- [Compile WPS for Intel CPUs](#compile-wps-for-intel-cpus)
 
 ## Fill out registation on the WRF page
 Go to [https://www2.mmm.ucar.edu/wrf/users/download/get_source.html] and register as a new user or submit your registered e-mail address as a "Returning User".
@@ -56,7 +56,66 @@ nohup ./compile em_real &> compile.log
 ```
 Note that the compilation may take hours.
 
+> [!NOTE]
+> WRF binaries built in this section are valid only in jobs submitted to Odyssey.
+> Before you execute WRF binaries in your job scripy, load `fj fjmpi hdf5 netcdf netcdf-fortran` modules.
+
 ## Compile WRF for Intel CPUs
 If you perform all preprocessing on your local system and you will not use WPS, this step is unnecessary.
 
-WPS, the preprocessing tool, requires WRF in the compilation process. However, the WPS building tool is apparently imcompatible to the Fujitsu compiler. Hence, you'll have to build another copy of WRF using other compilers. 
+WPS, the preprocessing tool, requires a build of WRF in the compilation process. However, the WPS configuration tool is apparently imcompatible to the Fujitsu compiler. Hence, you'll have to build another copy of WRF using other compilers. Here, I introduce how to build WRF using the Intel compiler.
+
+Make sure that `WRF_ROOT` is defined as the [root directory for WRF](#create-wrf-wps-root-directory). Then, run the following:
+
+```
+cd ${WRF_ROOT}
+mv WRF WRF_odyssey
+
+git clone https://github.com/wrf-model/WRF.git
+module purge
+module load intel hdf5 netcdf netcdf-fortran
+export NETCDF=$NETCDF_FORTRAN_DIR
+export NETCDF_C=$NETCDF_DIR
+export HDF5=$HDF5_DIR
+cd ${WRF_ROOT}/WRF
+./configure
+```
+
+The `Enter selection` prompt will appear again. This time, select a number (13 in WRF 4.6.1) featuring "serial" and "INTEL" with **NO** midifiers such as "Xeon Phi" and "SGI MPT". 
+
+As for the nesting, select `0=no nesting` if available because you are NOT going to use this build for actual simulations.
+
+If the configuration succeeds, you can go ahead and build WRF:
+```
+nohup ./compile em_real &> compile.log
+cd ${WRF_ROOT}
+mv WRF WRF_intel
+```
+Note that the compilation may take hours again.
+
+## Compile WPS for Intel CPUs
+Make sure that `WRF_ROOT` is defined as the [root directory for WRF](#create-wrf-wps-root-directory). Then, run the following:
+```
+module purge
+module load intel hdf5 netcdf netcdf-fortran
+export NETCDF=$NETCDF_FORTRAN_DIR
+export NETCDF_C=$NETCDF_DIR
+export HDF5=$HDF5_DIR
+export WRF_DIR=${WRF_ROOT}/WRF_intel
+
+cd ${WRF_ROOT}
+git clone https://github.com/wrf-model/WPS.git
+cd WPS
+./configure
+```
+This time, select a number described as `Linux x86_64, Intel Classic compilers    (serial)`.
+If the configuration succeeds, you can build WPS:
+```
+nohup ./compile &> compile.log
+```
+
+> [!NOTE]
+> WPS binaries built in this section are valid on prepost nodes and login nodes, but NOT on Odyssey.
+> Before you launch WPS binaries such as `ungrib.exe` and `metgrid.exe`, load `intel hdf5 netcdf netcdf-fortran` modules.
+> Please use the prepost node to prepare the initial conditions. However, if you are ABSOLUTELY SURE that the process finishes within a few minutes, you can launch WPS binaries on the login node.
+
