@@ -81,9 +81,9 @@ cd ${WRF_ROOT}/WRF
 ./configure
 ```
 
-The `Enter selection` prompt will appear again. This time, select a number (13 in WRF 4.6.1) featuring "serial" and "INTEL" with **NO** midifiers such as "Xeon Phi" and "SGI MPT". 
+The `Enter selection` prompt will appear again. This time, select a number (13 in WRF 4.6.1) featuring "serial" and "INTEL" with **NO** modifiers such as `Xeon Phi` and `SGI MPT`. 
 
-As for the nesting, select `0=no nesting` if available because you are NOT going to use this build for actual simulations.
+As for the nesting, select `0=no nesting` because you are not going to use this build for actual simulations.
 
 If the configuration succeeds, you can go ahead and build WRF:
 ```
@@ -94,6 +94,8 @@ mv WRF WRF_intel
 Note that the compilation may take hours again.
 
 ## Compile WPS for Intel CPUs
+If you perform all preprocessing on your local system and you will not use WPS, this step is unnecessary.
+
 Make sure that `WRF_ROOT` is defined as the [root directory for WRF](#create-wrf-wps-root-directory). Then, run the following:
 ```
 module purge
