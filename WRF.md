@@ -17,6 +17,17 @@ Do not build WRF or store any large files in your home directory!
 
 ### Your root working directory
 Your root working directory on Wisteria is `/work/your_group_name/your_user_ID/`, in which you can create a directory for WRF.
-After logging in, you can check your group name by typing `id -Gn` in the terminal. Most group names look like `gx00` or `jh000000a`. You can check your user ID by typing `echo $USER`. The user ID should look like `x00000`. For example, if your group name is `gx00` and your user ID is `x00000`, your root working directory is `/work/gx00/x00000`.
+After logging in, you can check your group name by typing `id -Gn` in the terminal. Most group names look like `gx00` or `jh000000a`. You can use an environment variable `${USER}` to represent your user ID. For example, if your group name is `gx00`, your root working directory is `/work/gx00/${USER}`.
+
+### Create WRF-WPS root directory
+You can create a directory for WRF and WPS anywhere inside [Your root working directory](#your-root-working-directory). Here, I assume that you want to install WRF in `/work/your_group_name/${USER}/WRF_WPS`. Then, do the following to create your WRF root directory:
+
+```
+mkdir -p /work/your_group_name/${USER}/WRF_WPS
+WRF_ROOT=/work/your_group_name/${USER}/WRF_WPS
+```
+
+> [!NOTE]
+> Replace `your_group_name` with one of your group id, which may look like `gx00` or `jh000000a`. See [Your root working directory](#your-root-working-directory) for details.
 
 ## Compile WRF for Odyssey
