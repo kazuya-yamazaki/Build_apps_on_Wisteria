@@ -31,3 +31,32 @@ WRF_ROOT=/work/your_group_name/${USER}/WRF_WPS
 > Replace `your_group_name` with one of your group id, which may look like `gx00` or `jh000000a`. See [Your root working directory](#your-root-working-directory) for details.
 
 ## Compile WRF for Odyssey
+Make sure that `WRF_ROOT` is defined as the [root directory for WRF](#create-wrf-wps-root-directory). Then, run the following:
+
+```
+module purge
+module load fj fjmpi hdf5 netcdf netcdf-fortran
+export LANG=C
+export NETCDF_classic=1
+export NETCDF=$NETCDF_FORTRAN_DIR
+export NETCDF_C=$NETCDF_DIR
+export HDF5=$HDF5_DIR
+git clone https://github.com/wrf-model/WRF.git
+
+cd ${WRF_ROOT}/WRF
+./configure
+```
+
+The `./configure` script will ask two questions.
+- "Enter selection": select a number featuring Fujitsu and dmpar. It is `82` in WRF 4.6.1, but it may change.
+- "Compile for nesting?": select whatever you like. Choose the basic nesting if moving nesting is unnecessary.
+If you see some errors, you'll have to read them and look them up on the Internet, or ask experts for help. If the configuration succeeds, you can go ahead and build WRF:
+```
+nohup ./compile em_real &> compile.log
+```
+Note that the compilation may take hours.
+
+## Compile WRF for Intel CPUs
+If you perform all preprocessing on your local system and you will not use WPS, this step is unnecessary.
+
+WPS, the preprocessing tool, requires WRF in the compilation process. However, the WPS building tool is apparently imcompatible to the Fujitsu compiler. Hence, you'll have to build another copy of WRF using other compilers. 
