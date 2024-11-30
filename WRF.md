@@ -48,7 +48,7 @@ cd ${WRF_ROOT}/WRF
 ```
 
 The `./configure` script will ask two questions.
-- "Enter selection": select a number featuring Fujitsu and dmpar. It is `82` in WRF 4.6.1, but it may change.
+- "Enter selection": select a number featuring `Fujitsu` and `dmpar`. It is `82` in WRF 4.6.1, but it may change.
 - "Compile for nesting?": select whatever you like. Choose the basic nesting if moving nesting is unnecessary.
 If you see some errors, you'll have to read them and look them up on the Internet, or ask experts for help. If the configuration succeeds, you can go ahead and build WRF:
 ```
@@ -61,7 +61,7 @@ Note that the compilation may take hours.
 > Before you execute WRF binaries in your job scripy, load `fj fjmpi hdf5 netcdf netcdf-fortran` modules.
 
 ## Compile WRF for Intel CPUs
-If you perform all preprocessing on your local system and you will not use WPS, this step is unnecessary.
+If you perform all preprocessing on your local system and you will not use WPS on Wisteria, this step is unnecessary.
 
 WPS, the preprocessing tool, requires a build of WRF in the compilation process. However, the WPS configuration tool is apparently imcompatible to the Fujitsu compiler. Hence, you'll have to build another copy of WRF using other compilers. Here, I introduce how to build WRF using the Intel compiler.
 
@@ -81,7 +81,7 @@ cd ${WRF_ROOT}/WRF
 ./configure
 ```
 
-The `Enter selection` prompt will appear again. This time, select a number (13 in WRF 4.6.1) featuring "serial" and "INTEL" with **NO** modifiers such as `Xeon Phi` and `SGI MPT`. 
+The `Enter selection` prompt will appear again. This time, select a number (13 in WRF 4.6.1) featuring `serial` and `INTEL` with **NO** modifiers such as `Xeon Phi` and `SGI MPT`. 
 
 As for the nesting, select `0=no nesting` because you are not going to use this build for actual simulations.
 
