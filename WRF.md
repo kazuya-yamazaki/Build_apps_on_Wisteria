@@ -58,7 +58,7 @@ Note that the compilation may take hours.
 
 > [!NOTE]
 > WRF binaries built in this section are valid only in jobs submitted to Odyssey.
-> Before you execute WRF binaries in your job scripy, load `fj fjmpi hdf5 netcdf netcdf-fortran` modules.
+> Before you execute WRF binaries in your job script, load `fj fjmpi hdf5 netcdf netcdf-fortran` modules.
 
 ## Compile WRF for Intel CPUs
 If you perform all preprocessing on your local system and you will not use WPS on Wisteria, this step is unnecessary.
