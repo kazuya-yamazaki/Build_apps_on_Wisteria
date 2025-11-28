@@ -57,7 +57,7 @@ nohup ./compile em_real &> compile.log
 Note that the compilation may take hours.
 
 > [!NOTE]
-> WRF binaries built in this section are valid only in jobs submitted to Odyssey.
+> WRF binaries built in this section are valid only on compute nodes in jobs submitted to Odyssey.
 > Before you execute WRF binaries in your job script, load `fj fjmpi hdf5 netcdf netcdf-fortran` modules.
 
 ## Compile WRF for Intel CPUs
